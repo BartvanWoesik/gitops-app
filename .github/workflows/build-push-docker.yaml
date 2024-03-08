@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout
+      - uses: actions/checkout@v4
         name: Changing the deployment of git repo
         with:
           repository: 'bartvanwoesik/gitops-manifest'
