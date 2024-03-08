@@ -42,7 +42,7 @@ jobs:
         name: Changing the deployment of git repo
         with:
           repository: 'bartvanwoesik/gitops-manifest'
-          token: ${{ secrets.GIT_PASSWORD }}
+          token: ${{ secrets.GIT_TOKEN }}
       - name: Modify the image
         run: |
           git config user.email bartwoesik1@gmail.com
