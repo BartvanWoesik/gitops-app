@@ -23,7 +23,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: nielshoogeveen1990/gitops-app
+          images: bartvanwoesik/gitops-app
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
@@ -31,7 +31,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: nielshoogeveen1990/gitops-app:app-${{ github.run_number }}
+          tags: bartvanwoesik/gitops-app:app-${{ github.run_number }}
           labels: ${{ steps.meta.outputs.labels }}
 
   modifygit:
@@ -41,16 +41,16 @@ jobs:
       - uses: actions/checkout@v4
         name: Changing the deployment of git repo
         with:
-          repository: 'NielsHoogeveen1990/gitops-manifest'
+          repository: 'bartvanwoesik/gitops-manifest'
           token: ${{ secrets.GIT_PASSWORD }}
       - name: Modify the image
         run: |
-          git config user.email hoogeveen.n.a@gmail.com
-          git config user.name NielsHoogeveen1990
+          git config user.email bartwoesik1@gmail.com
+          git config user.name bartvanwoesik
           pwd
           cat manifests/deployment.yaml
           pwd
-          sed -i "s+nielshoogeveen1990/gitops-app.*+nielshoogeveen1990/gitops-app:app-$RUN_NUMBER+g" manifests/deployment.yaml
+          sed -i "s+bartvanwoesik/gitops-app.*+bartvanwoesik/gitops-app:app-$RUN_NUMBER+g" manifests/deployment.yaml
           cat manifests/deployment.yaml
           git add .
           git commit -m 'Done  by Github Actions   Job changemanifest: ${{ github.run_number }}'
